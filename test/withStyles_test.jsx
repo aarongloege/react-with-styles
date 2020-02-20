@@ -570,7 +570,7 @@ describe('withStyles', () => {
         const MockComponent = ({ styles, css }) => <div {...css(styles.primary)} />;
         MockComponent.propTypes = { ...withStylesPropTypes };
         const StyledComponent = withStyles(stylesFn)(MockComponent);
-        const wrapper = shallow(<StyledComponent />);
+        const wrapper = shallow(<StyledComponent />).dive();
         expect(stylesFn.calledWith(testTheme)).to.equal(true);
         expect(wrapper.find(MockComponent).props()).to.have.property('theme', testTheme);
       });
