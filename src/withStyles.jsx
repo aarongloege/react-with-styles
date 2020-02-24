@@ -3,6 +3,7 @@
 import React from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 import getComponentName from 'airbnb-prop-types/build/helpers/getComponentName';
+import ref from 'airbnb-prop-types/build/ref';
 
 import EMPTY_STYLES_FN from './utils/emptyStylesFn';
 import withPerf from './utils/perf';
@@ -231,8 +232,12 @@ export function withStyles(
       }
     }
 
-    const ForwardedWithStyles = React.forwardRef((props, ref) => (
-      <WithStyles {...props} forwardedRef={ref} />
+    WithStyles.propTypes = {
+      forwardedRef: ref,
+    };
+
+    const ForwardedWithStyles = React.forwardRef((props, forwardedRef) => (
+      <WithStyles {...props} forwardedRef={forwardedRef} />
     ));
 
     // Copy the wrapped component's prop types and default props on WithStyles
